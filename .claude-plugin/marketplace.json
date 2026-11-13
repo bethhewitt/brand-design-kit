@@ -1,6 +1,9 @@
 {
   "name": "brand-design-kit",
-  "owner": { "name": "Norso Creative" },
+  "owner": {
+    "name": "Beth Hewitt",
+    "url": "https://github.com/bethhewitt"
+  },
   "plugins": [
     {
       "name": "brand-design-kit",

@@ -46,7 +46,7 @@ elsewhere, set `BD_RUNTIME` to a folder path.
 In Claude Code:
 
 ```
-/plugin marketplace add norsocreative/brand-design-kit
+/plugin marketplace add bethhewitt/brand-design-kit
 /plugin install brand-design-kit@brand-design-kit
 ```
 

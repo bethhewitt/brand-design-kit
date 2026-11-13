@@ -2,7 +2,22 @@
   "name": "brand-design-kit",
   "version": "1.0.0",
   "description": "On-brand one-pagers, reports, social posts, email graphics and landing pages, built from the brand files in your own repository and exported to PNG or PDF.",
-  "author": { "name": "Norso Creative" },
+  "author": {
+    "name": "Beth Hewitt",
+    "url": "https://github.com/bethhewitt"
+  },
   "license": "MIT",
-  "keywords": ["brand", "design", "social", "one-pager", "report", "email", "landing-page", "pdf", "png"]
+  "keywords": [
+    "brand",
+    "design",
+    "social",
+    "one-pager",
+    "report",
+    "email",
+    "landing-page",
+    "pdf",
+    "png"
+  ],
+  "homepage": "https://github.com/bethhewitt/brand-design-kit",
+  "repository": "https://github.com/bethhewitt/brand-design-kit"
 }
