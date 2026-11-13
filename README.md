@@ -43,23 +43,53 @@ elsewhere, set `BD_RUNTIME` to a folder path.
 
 ### As a plugin (recommended)
 
-In Claude Code:
+This takes two commands. Send them **one at a time**, as two separate
+messages. If you paste both lines at once, only the first one runs: the
+marketplace gets added but the plugin never installs.
+
+First, in Claude Code, add the marketplace:
 
 ```
 /plugin marketplace add bethhewitt/brand-design-kit
+```
+
+When that has finished, install the plugin:
+
+```
 /plugin install brand-design-kit@brand-design-kit
 ```
 
-Updates arrive through `/plugin`. In plugin form the skills are named
-`brand-design-kit:brand-one-pager` and so on, but you never need to type
-those names.
+Then start a new Claude Code session. Skills from a newly installed plugin
+don't appear in a session that was already open.
 
-To try a local copy before it's on GitHub, point the marketplace at the
-folder instead:
+**From a terminal instead.** If `/plugin` isn't available where you use
+Claude (some apps don't offer it), run the same two steps in a terminal
+with the `claude` command line tool:
 
+```bash
+claude plugin marketplace add bethhewitt/brand-design-kit
 ```
-/plugin marketplace add /path/to/brand-design-kit
+
+```bash
+claude plugin install brand-design-kit@brand-design-kit
 ```
+
+**To check it worked**, run `claude plugin list` in a terminal and look for
+`brand-design-kit` with status enabled.
+
+**To update later**, run these in a terminal, one after the other, then
+start a new session:
+
+```bash
+claude plugin marketplace update brand-design-kit
+```
+
+```bash
+claude plugin update brand-design-kit@brand-design-kit
+```
+
+In plugin form the skills are named `brand-design-kit:brand-one-pager` and
+so on, but you never need to type those names.
 
 ### As plain skills
 
