@@ -100,7 +100,7 @@ Then act on the verdict:
 - **MISSING:** say there's no `DESIGN.md`. If the script listed other brand
   docs (`BRAND.md`, a style guide) or token files, offer to build `DESIGN.md`
   from them via `brand-audit.md`. Otherwise offer the three routes in
-  `<brand-design>/references/brand-discovery.md` §5 (extract from a website,
+  `<brand-design>/references/brand-discovery.md` §6 (extract from a website,
   create brand files, go unbranded).
 
 Never fill a gap yourself with a value that "looks right". Every value comes

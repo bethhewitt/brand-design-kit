@@ -47,8 +47,9 @@ says an asset doesn't look like their brand.
 
 1. **Find it.** `discover.py` lists *finished work*: exported images and PDFs
    other than logo files (social posts, covers, carousels, decks, emails,
-   ads), grouped by folder, newest first. It also lists *design boards*:
-   HTML or image artboards and design source files in brand folders. Also
+   ads), grouped by folder, newest first, including those inside brand
+   folders. It also lists *design boards*: HTML artboards and design
+   source files (Figma, Sketch, Illustrator and similar) in brand folders. Also
    check what the user's instructions (CLAUDE.md, README) point to.
 2. **Choose 4 to 8 pieces**, preferring the newest work and a spread of
    formats. Only use work the user made or approved. Skip anything this
@@ -76,6 +77,14 @@ says an asset doesn't look like their brand.
    silently trust the docs because a file says it is the source of truth.
    Record the answer in the notes, and offer to update the brand docs so
    they stop disagreeing.
+
+**If there is no finished work** (a new brand, brand files just created,
+the unbranded route, or the user has nothing approved to share), ask the
+user once whether they have examples elsewhere they can add to the repo. If
+not, still write the `## Observed in finished work` heading with the single
+line `None found (<date>): designing from the written docs only.` so later
+tasks don't search again, and say in the handover that the result couldn't
+be compared with real work. Rediscover once finished work exists.
 
 ## 4. Map to the contract
 
@@ -106,8 +115,14 @@ In practice (4 ads in marketing/campaigns/, 2 decks): white grounds, accent on
 Docs vs work: DESIGN.md says 12px rounded cards; every piece uses square tiles → which wins?
 ```
 
-On confirmation, write `.brand-design/brand-block.css` (with a header comment
-listing every source path) and `.brand-design/brand-notes.md`. Suggest adding
+On confirmation, write `.brand-design/brand-block.css` and
+`.brand-design/brand-notes.md`. The block's header comment must list every
+source path on a `Source:` line, separated by `+` or commas, so
+`discover.py --check-cache` can tell when one changes:
+
+```css
+/* Source: brand/DESIGN.md + src/styles/tokens.css (resolved 2026-11-12) */
+``` Suggest adding
 `.brand-design/` to git so the team shares one resolved brand.
 
 ## 6. When nothing is found

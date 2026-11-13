@@ -36,6 +36,15 @@ Licence: MIT, Copyright (c) 2026 Refero (full text in `LICENSES/MIT-refero_skill
 `skills/brand-design/references/craft/` reached OpenDesign from refero_skill
 and were modified again here.
 
+## Impeccable
+
+Source: https://github.com/pbakaus/impeccable (Apache License 2.0, Copyright 2025 Paul Bakaus)
+
+Credited, not copied. The "P2 — polish pass" section of
+`skills/brand-design/references/qa-checklist.md` follows the order of
+Impeccable's audit, polish and harden steps and uses those step names. Its
+wording is original to this kit; no Impeccable text or code is included.
+
 ## Playwright (installed at run time, not bundled)
 
 `render.sh` installs Playwright and Chromium from npm on first use, into a

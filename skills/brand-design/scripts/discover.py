@@ -79,15 +79,16 @@ def scan(root="."):
             kinds["styles"].append({"path": rel, **sig})
         elif in_brand_dir and BOARD_RE.search(name):
             kinds["boards"].append(rel)
-        elif in_brand_dir:
-            kinds["brand_dir"].append(rel)
         elif WORK_RE.search(name) and not WORK_SKIP_RE.search(name) and \
                 not any(p.lower() in WORK_SKIP_DIRS for p in rel.split(os.sep)):
+            # exported images/PDFs count as finished work, inside brand folders too
             try:
                 mtime = os.path.getmtime(os.path.join(root, rel))
             except OSError:
                 continue
             work.setdefault(os.path.dirname(rel) or ".", []).append((mtime, rel))
+        elif in_brand_dir:
+            kinds["brand_dir"].append(rel)
     kinds["styles"].sort(key=lambda s: -(s["root_vars"] + 20 * s["tailwind_theme"] + 5 * s["font_face"]))
     for k in kinds:
         kinds[k] = kinds[k][:MAX_PER_KIND]
@@ -113,7 +114,12 @@ def check_cache(root="."):
     sources = re.findall(r"(?:Source|Sources|source)s?:\s*(.+)", header)
     paths = []
     for line in sources:
-        paths += [p.strip() for p in re.split(r"[,+]", line) if p.strip() and "(" not in p]
+        line = line.split("*/", 1)[0]               # end of a one-line comment
+        line = re.sub(r"\([^)]*\)", " ", line)       # drop notes like "(resolved 2026-11-12)"
+        for p in re.split(r"[,+;]|\s·\s", line):
+            p = p.strip().strip("`'\"")
+            if p and p not in paths:
+                paths.append(p)
     cache_mtime = os.path.getmtime(cache)
     changed, missing = [], []
     for p in paths:

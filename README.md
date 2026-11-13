@@ -183,5 +183,7 @@ bash <kit>/scripts/render.sh post.html post.png --selector .frame --scale 1   # 
 
 MIT. See `LICENSE`. Some design rules and the web seed are adapted from
 [OpenDesign](https://github.com/nexu-io/open-design) (Apache-2.0) and
-[refero_skill](https://github.com/referodesign/refero_skill) (MIT); see
+[refero_skill](https://github.com/referodesign/refero_skill) (MIT), and the
+QA polish pass follows the steps of
+[Impeccable](https://github.com/pbakaus/impeccable); see
 `THIRD_PARTY_NOTICES.md`.

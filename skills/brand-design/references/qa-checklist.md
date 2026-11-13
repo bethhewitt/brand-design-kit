@@ -23,7 +23,10 @@ the source alone.
       three? Check, in order: which colours take the area, what colour the
       headings and body are, the signature components, and how big the
       biggest elements are relative to the rest. Any mismatch with the
-      observed notes is a P0, even when every token is correct.
+      observed notes is a P0, even when every token is correct. If the
+      notes say `None found`, check the render against the written rules in
+      `brand-notes.md` instead and say in the handover that no finished
+      work was available to compare with.
 
 ## P1 — should pass
 
@@ -35,7 +38,7 @@ the source alone.
 
 ## P2 — polish pass
 
-Adapted from the Impeccable design-polish workflow:
+Follows the order of the Impeccable design-polish workflow (see `THIRD_PARTY_NOTICES.md`):
 
 1. **Audit.** Name the 3 highest-impact problems in hierarchy, spacing, colour, type and responsiveness.
 2. **Polish.** Fix those 3. Prefer a few decisive fixes over broad cosmetic churn, and keep the user's content and intent.
