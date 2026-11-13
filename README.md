@@ -101,13 +101,20 @@ What happens:
 2. **Brand discovery.** The kit lists brand-like files in the repo (docs,
    token files, stylesheets, logos, fonts, voice guides) and builds a brand
    block from them. Higher sources win when they conflict: written brand
-   docs, then token files, then app styles. It shows you a short summary
-   (colours, fonts, logo, anything it had to derive, any conflicts) and
-   waits for your OK.
+   docs, then token files, then app styles. It also finds your finished,
+   approved work (social posts, covers, decks, emails) and your design
+   boards, looks at 4 to 8 of them, and writes down how the brand actually
+   behaves: which colours take the area, what colour headings and body text
+   are, and the signature components. It shows you a short summary
+   (colours, fonts, logo, anything it had to derive, any conflicts, and
+   anywhere your docs and your finished work disagree) and waits for your
+   OK. Keep rejected drafts in a folder named `archive` or `rejected` so
+   they aren't mistaken for examples.
 3. **Your choices.** It asks for the format and size every time (A4 or
    Letter, which platform sizes, PNG or PDF) and for any content it needs.
 4. **Build, check, export.** It writes HTML, renders it, runs mechanical
-   checks, looks at the rendered file and fixes problems before handing over.
+   checks, looks at the rendered file next to two pieces of your finished
+   work and fixes problems before handing over.
 
 After the first run the brand is saved in a `.brand-design/` folder inside
 your project. If you use git, commit it so your team shares one brand. The cache is rebuilt
@@ -165,7 +172,7 @@ The skills run these for you, but they also work by hand. `<kit>` is
 wherever `skills/brand-design` lives.
 
 ```bash
-python3 <kit>/scripts/discover.py                  # list brand files in this repo
+python3 <kit>/scripts/discover.py                  # list brand files, boards and finished work in this repo
 python3 <kit>/scripts/check.py --brand tokens.css  # contrast check on your tokens
 python3 <kit>/scripts/check.py page.html           # QA an HTML output
 bash <kit>/scripts/render.sh page.html page.pdf    # export to PDF

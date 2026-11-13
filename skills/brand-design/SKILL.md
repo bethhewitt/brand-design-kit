@@ -43,8 +43,11 @@ the general web seed.
    handle any gaps. Carry those gaps into the handover in step 6.
 1. **Resolve the brand.** Follow `references/brand-discovery.md`. The output
    is `.brand-design/brand-block.css` and `.brand-design/brand-notes.md` at
-   the repo root. Don't start layout until the user has seen the brand summary
-   once in this repo.
+   the repo root. This includes **looking at the brand's finished work**
+   (discovery step 3), not just reading its docs and tokens: the notes need
+   an `## Observed in finished work` section before any layout. Don't start
+   layout until the user has seen the brand summary, including where the
+   docs and the work disagree, once in this repo.
 2. **Ask for the output, every time.** Use the AskUserQuestion tool, or plain
    questions if it isn't available. Offer the task skill's format and size
    menu, even if the user named a format earlier in another task. Formats
@@ -66,7 +69,8 @@ the general web seed.
    `bash <brand-design>/scripts/render.sh <in.html> <out.png|pdf> [options]`.
    The first run installs Chromium, which takes about a minute. Run
    `python3 <brand-design>/scripts/check.py <in.html>`, then **look at the
-   rendered file** and walk `references/qa-checklist.md`. Fix and re-render
+   rendered file next to two pieces of the brand's finished work** and walk
+   `references/qa-checklist.md`. Fix and re-render
    until P0 is clean.
 6. **Hand over.** List the files written, the brand sources used, any
    `DESIGN.md` gaps from preflight the user chose to live with, any
@@ -84,7 +88,7 @@ the general web seed.
 | `references/craft/*.md` | Typography, hierarchy, editorial type, colour, accessibility, anti-AI-slop rules |
 | `assets/web-seed.html` + `assets/layouts.md` | Token-driven base page and 8 section layouts |
 | `assets/DESIGN.template.md`, `assets/tokens.template.css` | Starter brand files for repos without one |
-| `scripts/discover.py` | Lists brand files in the repo; `--check-cache` checks whether the resolved brand is fresh |
+| `scripts/discover.py` | Lists brand files, design boards and finished work in the repo; `--check-cache` checks whether the resolved brand is fresh and whether finished work has been studied |
 | `scripts/check.py` | Mechanical QA on HTML; `--brand` checks token contrast |
 | `scripts/render.sh` | HTML → PNG / PDF (multi-frame with `--selector`) |
 
@@ -113,6 +117,11 @@ Never install software for them without asking.
 
 ## Common mistakes
 
+- Building from the written docs and tokens without looking at a single
+  finished piece. Right hex values in the wrong proportions still look
+  off brand.
+- Treating "this file is the source of truth" as a reason to skip the
+  design boards and finished work it was written from.
 - Skipping preflight because "the brand looks obvious".
 - Designing before the brand is resolved, then retrofitting colours.
 - Treating a remembered format choice as permission to skip step 2.

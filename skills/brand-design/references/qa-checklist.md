@@ -17,6 +17,13 @@ the source alone.
 - [ ] Open the HTML file itself, not just the export: every image loads.
 - [ ] Output is at the exact size the user chose. Nothing is clipped or overflows the frame or page.
 - [ ] The seven cardinal sins in `craft/anti-ai-slop.md` are absent.
+- [ ] **Side by side with the brand's own work.** Open the render next to two
+      pieces listed under `## Observed in finished work` in `brand-notes.md`.
+      Would someone who knows the brand believe the same person made all
+      three? Check, in order: which colours take the area, what colour the
+      headings and body are, the signature components, and how big the
+      biggest elements are relative to the rest. Any mismatch with the
+      observed notes is a P0, even when every token is correct.
 
 ## P1 — should pass
 

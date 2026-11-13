@@ -4,7 +4,8 @@
 Usage (from the repo root):
   python3 discover.py                 # human-readable listing
   python3 discover.py --json          # machine-readable
-  python3 discover.py --check-cache   # is .brand-design/brand-block.css fresh?
+  python3 discover.py --check-cache   # is .brand-design/brand-block.css fresh,
+                                      # and do the notes record finished work?
 """
 import json
 import os
@@ -24,6 +25,12 @@ TOKEN_RE = re.compile(r"(^tokens?\.(css|scss|json|js|ts)$)|(\.tokens\.json$)|(^d
 STYLE_RE = re.compile(r"\.(css|scss|sass|less)$", re.I)
 LOGO_RE = re.compile(r"(logo|wordmark|logomark|brandmark|monogram|favicon)[^/]*\.(svg|png|jpe?g|webp|ico)$", re.I)
 FONT_RE = re.compile(r"\.(woff2?|ttf|otf)$", re.I)
+WORK_RE = re.compile(r"\.(png|jpe?g|webp|gif|pdf)$", re.I)
+BOARD_RE = re.compile(r"\.(html?|fig|sketch|xd|af|psd|ai)$", re.I)
+WORK_SKIP_RE = re.compile(r"(screenshot|preview|thumb|icon|avatar|favicon|sprite)", re.I)
+MAX_WORK_FOLDERS = 15
+# folders whose contents are retired or rejected, never examples of the brand
+WORK_SKIP_DIRS = {"archive", "archived", "rejected", "rejected-drafts", "old", "_old", "deprecated", "trash"}
 VOICE_RE = re.compile(r"(tone|voice|copy|messaging|writing)[-_ ]?(guide|guidelines)?\.(md|mdx|txt|pdf)$", re.I)
 
 
@@ -54,7 +61,9 @@ def css_signals(path):
 
 
 def scan(root="."):
-    kinds = {"docs": [], "tokens": [], "styles": [], "logos": [], "fonts": [], "voice": [], "brand_dir": []}
+    kinds = {"docs": [], "tokens": [], "styles": [], "logos": [], "fonts": [], "voice": [],
+             "boards": [], "brand_dir": []}
+    work = {}  # folder -> [(mtime, rel)]
     for rel, name, in_brand_dir in walk(root):
         if DOC_RE.search(name):
             kinds["docs"].append(rel)
@@ -68,11 +77,30 @@ def scan(root="."):
             kinds["fonts"].append(rel)
         elif STYLE_RE.search(name) and (sig := css_signals(os.path.join(root, rel))):
             kinds["styles"].append({"path": rel, **sig})
+        elif in_brand_dir and BOARD_RE.search(name):
+            kinds["boards"].append(rel)
         elif in_brand_dir:
             kinds["brand_dir"].append(rel)
+        elif WORK_RE.search(name) and not WORK_SKIP_RE.search(name) and \
+                not any(p.lower() in WORK_SKIP_DIRS for p in rel.split(os.sep)):
+            try:
+                mtime = os.path.getmtime(os.path.join(root, rel))
+            except OSError:
+                continue
+            work.setdefault(os.path.dirname(rel) or ".", []).append((mtime, rel))
     kinds["styles"].sort(key=lambda s: -(s["root_vars"] + 20 * s["tailwind_theme"] + 5 * s["font_face"]))
     for k in kinds:
         kinds[k] = kinds[k][:MAX_PER_KIND]
+    # finished work: folders of exported images/PDFs, newest folder first
+    folders = []
+    for folder, files in work.items():
+        files.sort(reverse=True)
+        folders.append({"folder": folder, "count": len(files), "newest": files[0][0],
+                        "files": [f for _, f in files[:4]]})
+    folders.sort(key=lambda f: -f["newest"])
+    for f in folders:
+        del f["newest"]
+    kinds["work"] = folders[:MAX_WORK_FOLDERS]
     return kinds
 
 
@@ -95,8 +123,15 @@ def check_cache(root="."):
         elif os.path.getmtime(full) > cache_mtime:
             changed.append(p)
     status = "stale" if (changed or missing or not paths) else "fresh"
-    return {"status": status, "sources": paths, "changed": changed, "missing": missing,
-            "note": "" if paths else "cache header lists no sources; rediscover"}
+    notes_path = os.path.join(root, ".brand-design", "brand-notes.md")
+    notes = open(notes_path, encoding="utf-8", errors="ignore").read() if os.path.exists(notes_path) else ""
+    observed = "present" if re.search(r"^##\s+Observed in finished work", notes, re.M | re.I) else "missing"
+    note = "" if paths else "cache header lists no sources; rediscover"
+    if observed == "missing":
+        note = (note + "; " if note else "") + \
+            "brand-notes.md has no '## Observed in finished work' section: study finished work (brand-discovery step 3) before designing"
+    return {"status": status, "observed": observed, "sources": paths, "changed": changed,
+            "missing": missing, "note": note}
 
 
 def main():
@@ -112,6 +147,7 @@ def main():
         "docs": "1. Written brand docs", "tokens": "2. Token / theme files",
         "styles": "3. Stylesheets with brand signals", "logos": "4a. Logos",
         "fonts": "4b. Font files", "voice": "5. Voice / copy guides",
+        "boards": "4c. Design boards (look at these)",
         "brand_dir": "Other files in brand folders",
     }
     empty = True
@@ -131,6 +167,13 @@ def main():
                 print(f"  {it['path']}  ({', '.join(bits)})")
             else:
                 print(f"  {it}")
+    if result["work"]:
+        empty = False
+        print("\n6. Finished work, newest folders first (look at 4-8 approved pieces; see discovery step 3)")
+        for f in result["work"]:
+            print(f"  {f['folder']}/  ({f['count']} files)")
+            for p in f["files"]:
+                print(f"    {p}")
     if empty:
         print("No brand files found. Follow 'When nothing is found' in references/brand-discovery.md.")
 
