@@ -28,7 +28,8 @@ the user. If it hasn't run in this task, invoke it now and come back with its
 verdict.
 
 If the request clearly matches one, invoke that skill. It sends you back
-here for steps 1–3. If it matches none, say which five exist and offer the
+here for steps 1–3, builds with step 4 plus its own rules, then returns for
+steps 5–6. If it matches none, say which five exist and offer the
 closest. For something genuinely different, apply steps 1–3 and 5–6 with
 the general web seed.
 

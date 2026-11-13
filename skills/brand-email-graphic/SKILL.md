@@ -11,7 +11,9 @@ Design for that.
 
 **First:** run `brand-preflight` (the DESIGN.md check) if it hasn't run in
 this task. Then read `../brand-design/SKILL.md` and complete core steps 1–3.
-Paths below are relative to `../brand-design/`.
+Build with core step 4 plus the rules below, then finish with core steps 5–6
+(`check.py`, the QA checklist, the hand-over list). Paths below are relative
+to `../brand-design/`.
 
 ## Step 2 — ask every time
 
