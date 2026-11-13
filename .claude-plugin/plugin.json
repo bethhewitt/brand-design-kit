@@ -1,0 +1,8 @@
+{
+  "name": "brand-design-kit",
+  "version": "1.0.0",
+  "description": "On-brand one-pagers, reports, social posts, email graphics and landing pages, built from the brand files in your own repository and exported to PNG or PDF.",
+  "author": { "name": "Norso Creative" },
+  "license": "MIT",
+  "keywords": ["brand", "design", "social", "one-pager", "report", "email", "landing-page", "pdf", "png"]
+}

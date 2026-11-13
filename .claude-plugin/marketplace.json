@@ -1,0 +1,12 @@
+{
+  "name": "brand-design-kit",
+  "owner": { "name": "Norso Creative" },
+  "plugins": [
+    {
+      "name": "brand-design-kit",
+      "source": "./",
+      "description": "On-brand one-pagers, reports, social posts, email graphics and landing pages, built from the brand files in your own repository.",
+      "version": "1.0.0"
+    }
+  ]
+}
