@@ -1,6 +1,6 @@
 # Brand design kit
 
-Six Claude Code skills that make on-brand marketing assets from the brand
+Seven Claude Code skills that make on-brand marketing assets from the brand
 files already in your repository: one-pagers, reports, social posts and
 carousels, email graphics and full HTML emails, and landing pages. Each one
 is built as HTML, checked, and exported to PNG or PDF.
@@ -14,6 +14,7 @@ brand files yet, it helps you write them.
 
 | Skill | Makes |
 |---|---|
+| `brand-preflight` | Runs first, every time: checks your `DESIGN.md` has enough to design from (colours, fonts, logo, voice) and helps fill the gaps before any design starts. |
 | `brand-design` | The shared core: finds and resolves your brand, checks contrast, renders, runs QA. Also audits or writes `DESIGN.md` and tokens. |
 | `brand-one-pager` | One-pagers, sell sheets, fact sheets (A4 or Letter PDF, PNG, HTML) |
 | `brand-report` | Reports, whitepapers, case studies, e-guides (multi-page PDF or HTML long-read) |
@@ -50,18 +51,18 @@ one time only), so it takes a couple of minutes. Later exports are quick.
 2. Copy this message, paste it in, and send it:
 
    ```
-   Please install the brand design kit for me. Download https://github.com/bethhewitt/brand-design-kit/archive/refs/heads/main.zip, unzip it into a temporary folder, and copy the six folders inside its skills folder into my personal Claude skills folder (~/.claude/skills on Mac and Linux, or .claude\skills in my user folder on Windows). Create that folder if it doesn't exist, and replace any older copies of those six folders. Then delete the download and tell me when it's done.
+   Please install the brand design kit for me. Download https://github.com/bethhewitt/brand-design-kit/archive/refs/heads/main.zip, unzip it into a temporary folder, and copy the seven folders inside its skills folder into my personal Claude skills folder (~/.claude/skills on Mac and Linux, or .claude\skills in my user folder on Windows). Create that folder if it doesn't exist, and replace any older copies of those seven folders. Then delete the download and tell me when it's done.
    ```
 
 3. Claude may ask permission to run a few commands. Allow them.
 4. When it says it's done, **start a new session**. A session that was
    already open won't see the new skills.
 5. To check, ask the new session: "Which brand design skills do you have?"
-   It should list six, starting with `brand-design`.
+   It should list seven, including `brand-preflight` and `brand-design`.
 
 **To update** later, send the same message again, then start a new session.
 
-**To remove** the kit, ask Claude: "Delete the six brand- folders from my
+**To remove** the kit, ask Claude: "Delete the seven brand- folders from my
 personal Claude skills folder."
 
 ### As a plugin (if you use Claude Code in a terminal)
@@ -90,15 +91,22 @@ an empty one) and ask for something, for example:
 
 What happens:
 
-1. **Brand discovery.** The kit lists brand-like files in the repo (docs,
+1. **DESIGN.md check.** Before anything else, the kit checks your
+   `DESIGN.md`: does it name your colours (with an accent), your fonts and
+   a logo file that exists, and does it cover voice, do's and don'ts and
+   the other sections of the standard template? You get a verdict (ready,
+   gaps, not enough, or missing) and a choice: fix the gaps now or carry on.
+   The result is saved, so it only asks again when `DESIGN.md` changes. You
+   can also run it on its own: "is our DESIGN.md good enough?"
+2. **Brand discovery.** The kit lists brand-like files in the repo (docs,
    token files, stylesheets, logos, fonts, voice guides) and builds a brand
    block from them. Higher sources win when they conflict: written brand
    docs, then token files, then app styles. It shows you a short summary
    (colours, fonts, logo, anything it had to derive, any conflicts) and
    waits for your OK.
-2. **Your choices.** It asks for the format and size every time (A4 or
+3. **Your choices.** It asks for the format and size every time (A4 or
    Letter, which platform sizes, PNG or PDF) and for any content it needs.
-3. **Build, check, export.** It writes HTML, renders it, runs mechanical
+4. **Build, check, export.** It writes HTML, renders it, runs mechanical
    checks, looks at the rendered file and fixes problems before handing over.
 
 After the first run the brand is saved in a `.brand-design/` folder inside

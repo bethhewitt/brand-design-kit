@@ -9,7 +9,8 @@ Social graphics are read on a phone, in a feed, in under two seconds. That
 means big type, one idea per frame, and the brand recognisable from a
 thumbnail.
 
-**First:** read `../brand-design/SKILL.md` and complete core steps 1–3.
+**First:** run `brand-preflight` (the DESIGN.md check) if it hasn't run in
+this task. Then read `../brand-design/SKILL.md` and complete core steps 1–3.
 Paths below are relative to `../brand-design/`.
 
 ## Step 2 — ask every time

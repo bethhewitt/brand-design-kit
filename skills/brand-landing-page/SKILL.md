@@ -9,7 +9,8 @@ A landing page exists to get one action from one audience. Every section
 either moves the reader toward that action or removes a reason not to take
 it.
 
-**First:** read `../brand-design/SKILL.md` and complete core steps 1–3.
+**First:** run `brand-preflight` (the DESIGN.md check) if it hasn't run in
+this task. Then read `../brand-design/SKILL.md` and complete core steps 1–3.
 Paths below are relative to `../brand-design/`.
 
 ## Step 2 — ask every time

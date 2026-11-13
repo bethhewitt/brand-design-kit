@@ -80,7 +80,9 @@ each failing **stated** colour. Never silently pick a side on a stated value.
    No check may SKIP. All stated colours must be unchanged from the sources
    the user approved.
 5. **Reset the cache.** Delete `.brand-design/` so the next design task
-   re-resolves the brand from the new files.
+   re-resolves the brand from the new files. Then run
+   `python3 ../brand-preflight/scripts/preflight.py --save` (path relative
+   to `<brand-design>`) and include its new verdict in the handover.
 
 ## 4. Hand over
 

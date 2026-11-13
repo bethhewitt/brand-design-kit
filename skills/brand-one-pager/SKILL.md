@@ -8,7 +8,8 @@ description: Use when asked for an on-brand one-pager, sell sheet, fact sheet, l
 One page, one idea, scannable in 30 seconds. A one-pager is a sales or
 briefing document, not a shrunken website.
 
-**First:** read `../brand-design/SKILL.md` and complete core steps 1–3
+**First:** run `brand-preflight` (the DESIGN.md check) if it hasn't run in
+this task. Then read `../brand-design/SKILL.md` and complete core steps 1–3
 (resolve the brand, ask for the output, collect content). Paths below are
 relative to `../brand-design/`.
 

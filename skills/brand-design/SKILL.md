@@ -22,6 +22,11 @@ skill that runs this core and then adds its own layout rules.
 | Social post, carousel, story, LinkedIn / Instagram / X / Facebook graphic | `brand-social-post` |
 | Landing page, campaign page, waitlist page, product page | `brand-landing-page` |
 
+**Before anything else, run `brand-preflight`.** It checks that the repo has
+a `DESIGN.md` with enough material to design from and settles any gaps with
+the user. If it hasn't run in this task, invoke it now and come back with its
+verdict.
+
 If the request clearly matches one, invoke that skill. It sends you back
 here for steps 1–3. If it matches none, say which five exist and offer the
 closest. For something genuinely different, apply steps 1–3 and 5–6 with
@@ -32,6 +37,9 @@ the general web seed.
 
 ## Core workflow (every task, every time)
 
+0. **Preflight.** `brand-preflight` has given a verdict on `DESIGN.md`
+   (READY, GAPS, INADEQUATE or MISSING) and the user has chosen how to
+   handle any gaps. Carry those gaps into the handover in step 6.
 1. **Resolve the brand.** Follow `references/brand-discovery.md`. The output
    is `.brand-design/brand-block.css` and `.brand-design/brand-notes.md` at
    the repo root. Don't start layout until the user has seen the brand summary
@@ -60,6 +68,7 @@ the general web seed.
    rendered file** and walk `references/qa-checklist.md`. Fix and re-render
    until P0 is clean.
 6. **Hand over.** List the files written, the brand sources used, any
+   `DESIGN.md` gaps from preflight the user chose to live with, any
    placeholders needing input, and anything you couldn't make on brand (for
    example, no licensed font file in the repo).
 
@@ -103,6 +112,7 @@ Never install software for them without asking.
 
 ## Common mistakes
 
+- Skipping preflight because "the brand looks obvious".
 - Designing before the brand is resolved, then retrofitting colours.
 - Treating a remembered format choice as permission to skip step 2.
 - Hardcoding a hex value "just this once" outside the brand block.

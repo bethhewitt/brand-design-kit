@@ -8,7 +8,8 @@ description: Use when asked for an on-brand report, whitepaper, e-guide, ebook, 
 A multi-page reading document. It needs authored hierarchy, a steady reading
 rhythm and figures that are honest about their data.
 
-**First:** read `../brand-design/SKILL.md` and complete core steps 1–3.
+**First:** run `brand-preflight` (the DESIGN.md check) if it hasn't run in
+this task. Then read `../brand-design/SKILL.md` and complete core steps 1–3.
 Paths below are relative to `../brand-design/`.
 
 ## Step 2 — ask every time
