@@ -24,87 +24,67 @@ brand files yet, it helps you write them.
 You don't call the core yourself. Ask for the asset and the matching skill
 runs it.
 
-## Requirements
+## What you need
 
-- **Claude Code** (CLI, desktop app or IDE extension).
-- **Python 3.8 or later** for the discovery and QA scripts. Standard library only.
-- **Node.js 18 or later** for PNG and PDF export.
-- **bash.** macOS and Linux have it. On Windows, use WSL or Git Bash.
-- About 450 MB of disk for the export runtime.
+- **A Claude subscription that includes Claude Code.** Use it in the Claude
+  desktop app (the Code tab), in a terminal, or in your code editor.
+  Nothing else is needed to install the kit.
+- **Node.js, for PNG and PDF export.** It's free. If you don't have it,
+  Claude tells you when you first export and explains how to get it: go to
+  [nodejs.org](https://nodejs.org), download the version marked LTS, and run
+  the installer. Until then you still get the HTML file, which you can open
+  in a browser and print to PDF.
+- **On a Mac,** the first run may show a pop-up asking to install "command
+  line developer tools". Click Install. It's an Apple download and takes a
+  few minutes.
 
-The first time you export, `render.sh` installs Playwright into a per-user
-cache (`~/.cache/brand-design/`) and Chromium into Playwright's own cache
-(`~/Library/Caches/ms-playwright` on macOS, `~/.cache/ms-playwright` on
-Linux). It takes a minute or two, needs internet access once, and never
-touches your project's `package.json`. To put the Playwright install
-elsewhere, set `BD_RUNTIME` to a folder path.
+The first PNG or PDF export downloads a rendering engine (a few hundred MB,
+one time only), so it takes a couple of minutes. Later exports are quick.
 
 ## Install
 
-### As a plugin (recommended)
+### Ask Claude to install it (works everywhere)
 
-This takes two commands. Send them **one at a time**, as two separate
-messages. If you paste both lines at once, only the first one runs: the
-marketplace gets added but the plugin never installs.
+1. Open Claude Code: in the Claude desktop app, go to the Code tab and start
+   a new session in any folder.
+2. Copy this message, paste it in, and send it:
 
-First, in Claude Code, add the marketplace:
+   ```
+   Please install the brand design kit for me. Download https://github.com/bethhewitt/brand-design-kit/archive/refs/heads/main.zip, unzip it into a temporary folder, and copy the six folders inside its skills folder into my personal Claude skills folder (~/.claude/skills on Mac and Linux, or .claude\skills in my user folder on Windows). Create that folder if it doesn't exist, and replace any older copies of those six folders. Then delete the download and tell me when it's done.
+   ```
+
+3. Claude may ask permission to run a few commands. Allow them.
+4. When it says it's done, **start a new session**. A session that was
+   already open won't see the new skills.
+5. To check, ask the new session: "Which brand design skills do you have?"
+   It should list six, starting with `brand-design`.
+
+**To update** later, send the same message again, then start a new session.
+
+**To remove** the kit, ask Claude: "Delete the six brand- folders from my
+personal Claude skills folder."
+
+### As a plugin (if you use Claude Code in a terminal)
+
+If you run Claude Code in a terminal, you can install it as a plugin instead,
+which makes updates easier. Send these as two separate messages, waiting for
+the first to finish. Pasting both at once only runs the first.
 
 ```
 /plugin marketplace add bethhewitt/brand-design-kit
 ```
 
-When that has finished, install the plugin:
-
 ```
 /plugin install brand-design-kit@brand-design-kit
 ```
 
-Then start a new Claude Code session. Skills from a newly installed plugin
-don't appear in a session that was already open.
+Then start a new session. Use one install route or the other, not both, or
+you'll have every skill twice.
 
-**From a terminal instead.** If `/plugin` isn't available where you use
-Claude (some apps don't offer it), run the same two steps in a terminal
-with the `claude` command line tool:
+## First run
 
-```bash
-claude plugin marketplace add bethhewitt/brand-design-kit
-```
-
-```bash
-claude plugin install brand-design-kit@brand-design-kit
-```
-
-**To check it worked**, run `claude plugin list` in a terminal and look for
-`brand-design-kit` with status enabled.
-
-**To update later**, run these in a terminal, one after the other, then
-start a new session:
-
-```bash
-claude plugin marketplace update brand-design-kit
-```
-
-```bash
-claude plugin update brand-design-kit@brand-design-kit
-```
-
-In plugin form the skills are named `brand-design-kit:brand-one-pager` and
-so on, but you never need to type those names.
-
-### As plain skills
-
-Copy the six folders in `skills/` into `~/.claude/skills/` (for you, in every
-project) or into a project's `.claude/skills/` (for everyone working on that
-repo). Keep all six side by side: the asset skills find the core at
-`../brand-design/`.
-
-```bash
-cp -R skills/brand-* ~/.claude/skills/
-```
-
-## First run in a repo
-
-Open Claude Code in your project and ask for something, for example:
+Start a Claude Code session in your project folder (any folder works, even
+an empty one) and ask for something, for example:
 
 > Make a one-pager about our new service.
 
@@ -121,8 +101,8 @@ What happens:
 3. **Build, check, export.** It writes HTML, renders it, runs mechanical
    checks, looks at the rendered file and fixes problems before handing over.
 
-After the first run the resolved brand is cached in `.brand-design/` at the
-repo root. Commit it so your team shares one brand. The cache is rebuilt
+After the first run the brand is saved in a `.brand-design/` folder inside
+your project. If you use git, commit it so your team shares one brand. The cache is rebuilt
 automatically when its source files change.
 
 ### No brand files yet?
@@ -133,7 +113,7 @@ The kit says so and offers three routes:
    and the logo from the live site.
 2. **Create brand files.** It asks a few questions (name, colours, fonts,
    logo file, three tone words, any don'ts) and writes `DESIGN.md` and
-   `tokens.css` at the repo root from its starter templates. You can also
+   `tokens.css` in your project folder from its starter templates. You can also
    start those yourself: copy `skills/brand-design/assets/DESIGN.template.md`
    and `skills/brand-design/assets/tokens.template.css` into your repo and
    fill in the brackets.

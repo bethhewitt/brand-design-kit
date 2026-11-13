@@ -11,12 +11,12 @@ RUNTIME="${BD_RUNTIME:-${XDG_CACHE_HOME:-$HOME/.cache}/brand-design/runtime-$PLA
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if ! command -v node >/dev/null 2>&1; then
-  echo "error: Node.js is required for PNG/PDF export (https://nodejs.org)" >&2
+  echo "error: Node.js is required for PNG/PDF export. It is free: install the LTS version from https://nodejs.org, then start a new Claude session." >&2
   exit 1
 fi
 
 if [[ ! -d "$RUNTIME/node_modules/playwright" ]]; then
-  echo "brand-design: installing Playwright $PLAYWRIGHT_VERSION into $RUNTIME (one-time)…" >&2
+  echo "brand-design: first export, downloading the rendering engine into $RUNTIME (one time only, a few minutes)…" >&2
   mkdir -p "$RUNTIME"
   npm install --silent --no-audit --no-fund --prefix "$RUNTIME" "playwright@$PLAYWRIGHT_VERSION" >&2
 fi

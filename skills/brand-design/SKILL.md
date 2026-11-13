@@ -78,6 +78,29 @@ the general web seed.
 | `scripts/check.py` | Mechanical QA on HTML; `--brand` checks token contrast |
 | `scripts/render.sh` | HTML → PNG / PDF (multi-frame with `--selector`) |
 
+## When a tool is missing
+
+Many users aren't technical. Explain any missing tool in one or two plain
+sentences, say exactly what to click, and keep going with what does work.
+Never install software for them without asking.
+
+- **No `python3`** (command not found, or macOS pops up a dialog asking to
+  install "command line developer tools"): tell the user that clicking
+  Install in that dialog is safe and takes a few minutes. Meanwhile, don't
+  wait. The scripts are helpers: find brand files by listing and reading
+  them yourself, work out contrast by hand, and walk
+  `references/qa-checklist.md` without `check.py`.
+- **No Node.js** (`render.sh` stops with "Node.js is required"): PNG and PDF
+  export need it. Tell the user it's a free program: go to
+  https://nodejs.org, download the version marked LTS, open the file and
+  click through the installer, then start a new Claude session. Until then,
+  hand over the HTML file. For a PDF format, tell them they can open the
+  HTML in their browser and choose File, then Print, then Save as PDF
+  (with background graphics switched on). A PNG needs Node.
+- **First export is slow:** the first `render.sh` run downloads a browser
+  engine (a few hundred MB) and can take a couple of minutes. Say so before
+  running it so the user doesn't think it has stalled.
+
 ## Common mistakes
 
 - Designing before the brand is resolved, then retrofitting colours.
